@@ -40,6 +40,7 @@ dependencies:
   flutter_animate: ^4.5.2
   flutter_svg: ^2.2.2
   font_awesome_flutter: ^10.12.0
+  webview_flutter: ^4.13.1
   
   
 
@@ -68,23 +69,12 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   
   assets:
-    - assets/images/video.png
-    - assets/images/weather.png
-    - assets/images/new.png
-    - assets/images/sohandev.png
-    - assets/wlak/wlakp.jpg
-    - assets/wlak/wlakm.jpg
-    - assets/wlak/wlakn.jpg
-    - assets/wlak/wlakg.jpg
-    - assets/news/newsa.jpg
-    - assets/news/newsb.jpg
-    - assets/news/newsc.jpg
-    - assets/news/newsg.jpg
-    - assets/news/newss.jpg
-    - assets/weather/weatherapp.jpg
-    - assets/weather/weatherserch.jpg
-    - assets/weather/weatherseting.jpg
-    
+    - assets/ecomas/
+    - assets/wlak/
+    - assets/news/
+    - assets/weather/
+    - assets/images/
+    - assets/chat/
 
  
   # An image asset can refer to one or more resolution-specific "variants", see

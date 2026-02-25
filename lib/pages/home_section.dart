@@ -7,10 +7,12 @@ class HomeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Container(
       height: MediaQuery.of(context).size.height,
       width: double.infinity,
-      color: const Color(0xFFECF3FF), // soft blue background
+      color: theme.scaffoldBackgroundColor, // theme-aware background
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -20,7 +22,7 @@ class HomeSection extends StatelessWidget {
               style: GoogleFonts.poppins(
                 fontSize: 48,
                 fontWeight: FontWeight.bold,
-                color: const Color(0xFF0D47A1),
+                color: theme.colorScheme.primary, // theme-aware primary color
               ),
               textAlign: TextAlign.center,
             ),
@@ -32,8 +34,9 @@ class HomeSection extends StatelessWidget {
                   'Flutter Developer',
                   textStyle: GoogleFonts.poppins(
                     fontSize: 24,
-                    color: Colors.grey[800],
                     fontWeight: FontWeight.w500,
+                    color:
+                        theme.textTheme.bodyMedium?.color, // theme-aware text
                   ),
                   speed: const Duration(milliseconds: 100),
                 ),
@@ -41,8 +44,8 @@ class HomeSection extends StatelessWidget {
                   'Firebase Expert',
                   textStyle: GoogleFonts.poppins(
                     fontSize: 24,
-                    color: Colors.grey[800],
                     fontWeight: FontWeight.w500,
+                    color: theme.textTheme.bodyMedium?.color,
                   ),
                   speed: const Duration(milliseconds: 100),
                 ),
@@ -50,8 +53,8 @@ class HomeSection extends StatelessWidget {
                   'Full-Stack App Creator',
                   textStyle: GoogleFonts.poppins(
                     fontSize: 24,
-                    color: Colors.grey[800],
                     fontWeight: FontWeight.w500,
+                    color: theme.textTheme.bodyMedium?.color,
                   ),
                   speed: const Duration(milliseconds: 100),
                 ),

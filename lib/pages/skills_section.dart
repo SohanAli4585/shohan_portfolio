@@ -1,61 +1,72 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'dart:html' as html;
 
 class SkillsSection extends StatelessWidget {
   const SkillsSection({super.key});
 
-  // Icon URLs
+  // Icon URLs / assets
   final Map<String, String> skillIcons = const {
     // Mobile & Frontend
-    "Flutter": "https://cdn.simpleicons.org/flutter/02569B",
-    "ReactJS": "https://cdn.simpleicons.org/react/61DAFB",
-    "NextJS": "https://cdn.simpleicons.org/nextdotjs/000000",
-    "Tailwind CSS": "https://cdn.simpleicons.org/tailwindcss/06B6D4",
+    "Flutter": "https://cdn.simpleicons.org/flutter",
+    "Dart": "https://cdn.simpleicons.org/dart",
+    "ReactJS": "https://cdn.simpleicons.org/react",
+    "NextJS": "https://cdn.simpleicons.org/nextdotjs",
+    "Tailwind CSS": "https://cdn.simpleicons.org/tailwindcss",
 
     // Backend & APIs
     "Firebase": "https://cdn.simpleicons.org/firebase/FFCA28",
-    "REST API": "https://cdn-icons-png.flaticon.com/512/1080/1080075.png",
-    "GraphQL": "https://cdn.simpleicons.org/graphql/E10098",
-    "N8N": "https://cdn.simpleicons.org/n8n/FF0000",
+    "REST API": "assets/images/restapi.png",
+    "Node.js": "https://cdn.simpleicons.org/nodedotjs/339933",
+    "MongoDB": "https://cdn.simpleicons.org/mongodb/47A248",
 
     // Tools
-    "Git": "https://cdn.simpleicons.org/git/F05032",
-    "Codemagic": "https://cdn.simpleicons.org/codemagic/000000",
-    "LiveKit": "https://cdn.simpleicons.org/livekit/007AFF",
-    "Arduino/ESP": "https://cdn.simpleicons.org/arduino/00979D",
+    "VS Code": "assets/images/vscode.png",
+    "GitHub": "https://cdn.simpleicons.org/github",
+    "Android Studio": "https://cdn.simpleicons.org/androidstudio",
+    "Git": "https://cdn.simpleicons.org/git",
   };
 
   // Categories
   final Map<String, List<String>> categories = const {
-    "📱 Mobile & Frontend": ["Flutter", "ReactJS", "NextJS", "Tailwind CSS"],
-    "⚙️ Backend & APIs": ["Firebase", "REST API", "GraphQL", "N8N"],
-    "🧠 Tools": ["Git", "Codemagic", "LiveKit", "Arduino/ESP"],
+    "📱 Mobile & Frontend": [
+      "Flutter",
+      "Dart",
+      "ReactJS",
+      "NextJS",
+      "Tailwind CSS",
+    ],
+    "⚙️ Backend & APIs": ["Firebase", "REST API", "Node.js", "MongoDB"],
+    "🧠 Tools": ["VS Code", "GitHub", "Android Studio", "Git"],
   };
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final screenWidth = MediaQuery.of(context).size.width;
-    int crossAxisCount = 4;
 
+    int crossAxisCount = 4;
     if (screenWidth < 1200) crossAxisCount = 3;
     if (screenWidth < 800) crossAxisCount = 2;
     if (screenWidth < 500) crossAxisCount = 1;
 
     return Container(
-      color: Colors.grey.shade100,
+      color: theme.scaffoldBackgroundColor,
       padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 40),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          /// 🔥 Title
+          Text(
             "My Skills",
-            style: TextStyle(
-              fontSize: 36,
+            style: theme.textTheme.headlineMedium?.copyWith(
               fontWeight: FontWeight.bold,
               letterSpacing: 1.2,
             ),
           ),
           const SizedBox(height: 40),
+
+          /// 🔥 Categories
           ...categories.entries.map((entry) {
             return Padding(
               padding: const EdgeInsets.only(bottom: 40),
@@ -64,12 +75,12 @@ class SkillsSection extends StatelessWidget {
                 children: [
                   Text(
                     entry.key,
-                    style: const TextStyle(
-                      fontSize: 26,
+                    style: theme.textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   const SizedBox(height: 20),
+
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -82,16 +93,17 @@ class SkillsSection extends StatelessWidget {
                     itemCount: entry.value.length,
                     itemBuilder: (context, index) {
                       final skill = entry.value[index];
+
                       return MouseRegion(
                         cursor: SystemMouseCursors.click,
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 300),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: theme.cardColor,
                             borderRadius: BorderRadius.circular(15),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.shade300,
+                                color: theme.shadowColor.withOpacity(0.15),
                                 blurRadius: 10,
                                 offset: const Offset(0, 5),
                               ),
@@ -100,8 +112,9 @@ class SkillsSection extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              /// 🔥 Icon
                               skillIcons[skill]!.endsWith(".png")
-                                  ? Image.network(
+                                  ? Image.asset(
                                       skillIcons[skill]!,
                                       height: 50,
                                       width: 50,
@@ -110,18 +123,28 @@ class SkillsSection extends StatelessWidget {
                                       skillIcons[skill]!,
                                       height: 50,
                                       width: 50,
-                                      colorFilter: const ColorFilter.mode(
-                                        Colors.black,
+                                      placeholderBuilder: (context) =>
+                                          const SizedBox(
+                                            height: 50,
+                                            width: 50,
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 2,
+                                            ),
+                                          ),
+                                      colorFilter: ColorFilter.mode(
+                                        theme.colorScheme.primary,
                                         BlendMode.srcIn,
                                       ),
                                     ),
+
                               const SizedBox(height: 15),
+
+                              /// 🔥 Skill name
                               Text(
                                 skill,
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: theme.textTheme.bodyLarge?.copyWith(
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 18,
                                 ),
                               ),
                             ],
@@ -134,6 +157,30 @@ class SkillsSection extends StatelessWidget {
               ),
             );
           }).toList(),
+
+          const SizedBox(height: 30),
+
+          /// 🔥 CV Button
+          Center(
+            child: ElevatedButton.icon(
+              onPressed: () {
+                html.window.open('assets/images/my_cv.pdf', '_blank');
+              },
+              icon: const Icon(Icons.download),
+              label: const Text("Download CV"),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 30,
+                  vertical: 15,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                backgroundColor: theme.colorScheme.primary,
+                foregroundColor: Colors.white,
+              ),
+            ),
+          ),
         ],
       ),
     );

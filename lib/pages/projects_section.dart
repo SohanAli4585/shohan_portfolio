@@ -5,8 +5,37 @@ class ProjectsSection extends StatelessWidget {
   ProjectsSection({super.key});
 
   final List<Map<String, dynamic>> projects = [
+    // projects list এখানে থাকবে
     {
-      "title": "weather app",
+      "title": "E-Commerce App",
+      "subtitle":
+          "A full-featured e-commerce mobile application with secure user authentication, product browsing, cart management, favorites, and seamless checkout experience.",
+      "techStack": [
+        "Flutter",
+        "Firebase Auth",
+        "Cloud Firestore",
+        "Firebase Storage",
+        "REST API",
+        "CI/CD",
+      ],
+
+      "images": [
+        "assets/ecomas/1.png",
+        "assets/ecomas/2.png",
+        "assets/ecomas/3.png",
+        "assets/ecomas/4.png",
+        "assets/ecomas/5.png",
+        "assets/ecomas/6.png",
+        "assets/ecomas/7.png",
+        "assets/ecomas/8.png",
+        "assets/ecomas/9.png",
+        "assets/ecomas/10.png",
+        "assets/ecomas/11.png",
+      ],
+      "video": "https://www.loom.com/share/8fec13be915144b18af7436c20b50b60",
+    },
+    {
+      "title": "Weather App",
       "subtitle":
           "Real-time weather, hourly updates & 7-day forecast — all in one app",
       "techStack": [
@@ -14,13 +43,14 @@ class ProjectsSection extends StatelessWidget {
         "API",
         "CI/CD",
         "Google Maps",
-        "Location T Racking",
+        "Location Tracking",
       ],
       "images": [
         "assets/weather/weatherapp.jpg",
         "assets/weather/weatherserch.jpg",
         "assets/weather/weatherseting.jpg",
       ],
+      "video": "https://www.loom.com/share/d5f680aab83142ca9ea13feca521ba09",
     },
     {
       "title": "News App",
@@ -28,9 +58,10 @@ class ProjectsSection extends StatelessWidget {
           "Stay informed with the latest news, trending stories, and daily headlines.",
       "techStack": ["Flutter", "Rest API"],
       "images": ["assets/news/newsb.jpg", "assets/news/newsg.jpg"],
+      "video": "https://www.loom.com/share/6a9ea261fb254b058d322462af683f98",
     },
     {
-      "title": "Wlaking App",
+      "title": "Walking App",
       "subtitle": "Walk. Track. Earn Rewards!",
       "techStack": ["Flutter", "Deep Linking", "Firebase", "Payment Gateway"],
       "images": [
@@ -39,19 +70,20 @@ class ProjectsSection extends StatelessWidget {
         "assets/wlak/wlakg.jpg",
         "assets/wlak/wlakm.jpg",
       ],
+      "video": "https://www.loom.com/share/53265a8a9fac4b8abd71833016d0d080",
     },
-
     {
-      "title": "News App",
+      "title": "Online Video App",
       "subtitle":
-          "Rider-focused delivery app enabling flexible shifts, real-time tracking, and efficient delivery management.",
+          "A YouTube-style video streaming application that allows users to browse, search, and watch videos online with a smooth and responsive viewing experience.",
       "techStack": [
         "Flutter",
-        "Graphql",
+        "YouTube API",
+        "REST API",
+        "Video Streaming",
         "CI/CD",
-        "Google Maps",
-        "Location Tracking",
       ],
+
       "images": [
         "assets/news/newsa.jpg",
         "assets/news/newsb.jpg",
@@ -59,28 +91,54 @@ class ProjectsSection extends StatelessWidget {
         "assets/news/newsg.jpg",
         "assets/news/newss.jpg",
       ],
+      "video": "https://www.loom.com/share/1ae2fafb254045339f7b42ad763c9326",
+    },
+    {
+      "title": "Real-Time Chat & Call App",
+      "subtitle":
+          "A modern real-time messaging application with secure authentication, instant chat, voice/video calling, message editing, and smooth user experience.",
+      "techStack": [
+        "Flutter",
+        "Firebase Auth",
+        "Cloud Firestore",
+        "Firebase Storage",
+        "ZegoCloud",
+        "WebRTC",
+        "REST API",
+        "CI/CD",
+      ],
+
+      "images": [
+        "assets/chat/one.jpg",
+        "assets/chat/tow.jpg",
+        "assets/chat/thare.jpg",
+        "assets/chat/four.jpg",
+        "assets/chat/five.jpg",
+        "assets/chat/six.jpg",
+        "assets/chat/siven.jpg",
+        "assets/chat/eight.jpg",
+      ],
     },
   ];
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final screenWidth = MediaQuery.of(context).size.width;
     int crossAxisCount = 3;
     if (screenWidth < 1200) crossAxisCount = 2;
     if (screenWidth < 800) crossAxisCount = 1;
 
     return Container(
-      color: Colors.grey.shade100,
+      color: theme.scaffoldBackgroundColor,
       padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 40),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             "Projects",
-            style: TextStyle(
-              fontSize: 36,
+            style: theme.textTheme.headlineLarge?.copyWith(
               fontWeight: FontWeight.bold,
-              letterSpacing: 1.2,
             ),
           ),
           const SizedBox(height: 40),
@@ -92,7 +150,7 @@ class ProjectsSection extends StatelessWidget {
               crossAxisCount: crossAxisCount,
               crossAxisSpacing: 25,
               mainAxisSpacing: 25,
-              childAspectRatio: 0.95,
+              childAspectRatio: 0.80,
             ),
             itemBuilder: (context, index) {
               final project = projects[index];
@@ -107,11 +165,15 @@ class ProjectsSection extends StatelessWidget {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: theme.brightness == Brightness.dark
+                        ? Colors.blueGrey.shade900
+                        : Colors.white,
                     borderRadius: BorderRadius.circular(18),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.15),
+                        color: theme.brightness == Brightness.dark
+                            ? Colors.black45
+                            : Colors.grey.withOpacity(0.15),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
@@ -120,7 +182,6 @@ class ProjectsSection extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // শুধু প্রথম ছবি দেখাও
                       ClipRRect(
                         borderRadius: const BorderRadius.vertical(
                           top: Radius.circular(18),
@@ -139,18 +200,17 @@ class ProjectsSection extends StatelessWidget {
                           children: [
                             Text(
                               project["title"],
-                              style: const TextStyle(
-                                fontSize: 20,
+                              style: theme.textTheme.titleMedium?.copyWith(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black87,
+                                color: theme.colorScheme.onBackground,
                               ),
                             ),
                             const SizedBox(height: 8),
                             Text(
                               project["subtitle"],
-                              style: TextStyle(
-                                fontSize: 14.5,
-                                color: Colors.grey.shade800,
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color: theme.colorScheme.onBackground
+                                    .withOpacity(0.8),
                                 height: 1.4,
                               ),
                             ),
@@ -166,15 +226,17 @@ class ProjectsSection extends StatelessWidget {
                                     horizontal: 10,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: Colors.blue.shade50,
+                                    color: theme.brightness == Brightness.dark
+                                        ? Colors.blueGrey.shade800
+                                        : Colors.blue.shade50,
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Text(
                                     project["techStack"][i],
-                                    style: const TextStyle(
+                                    style: theme.textTheme.bodyMedium?.copyWith(
                                       fontSize: 12.5,
                                       fontWeight: FontWeight.w600,
-                                      color: Colors.black87,
+                                      color: theme.colorScheme.onBackground,
                                     ),
                                   ),
                                 ),

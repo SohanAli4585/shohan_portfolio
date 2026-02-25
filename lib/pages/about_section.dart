@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AboutSection extends StatelessWidget {
   const AboutSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
-      color: Colors.white,
+      color: theme.scaffoldBackgroundColor, // ✅ Theme-aware background
       padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 50),
       child: screenWidth > 900
           ? Row(
@@ -25,10 +25,12 @@ class AboutSection extends StatelessWidget {
                       height: 400,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
-                        return const Icon(
+                        return Icon(
                           Icons.person,
                           size: 200,
-                          color: Colors.grey,
+                          color: theme.colorScheme.onBackground.withOpacity(
+                            0.3,
+                          ),
                         );
                       },
                     ),
@@ -42,61 +44,71 @@ class AboutSection extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // About Me Title
                       Text(
                         "About Me",
-                        style: GoogleFonts.poppins(
-                          fontSize: 36,
+                        style: theme.textTheme.headlineMedium?.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: Colors.blue.shade900,
                         ),
                       ),
                       const SizedBox(height: 12),
+
+                      // Name / Role
                       Text(
                         "Md Shohan Ahamed\nFlutter App / Frontend Developer\nDhaka, Bangladesh",
-                        style: GoogleFonts.poppins(
-                          fontSize: 20,
+                        style: theme.textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w500,
-                          color: Colors.grey[800],
                         ),
                       ),
                       const SizedBox(height: 20),
+
+                      // Description
                       Text(
                         "I'm a Mobile App & Frontend Developer with 3+ years of experience, specializing in Flutter and React/Next.js. I love building fast, responsive, and visually appealing digital experiences that work flawlessly across devices. Passionate about writing clean, maintainable code and staying updated with the latest technologies, I focus on creating user-centric products that blend performance, design, and scalability.",
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          color: Colors.grey[700],
+                        style: theme.textTheme.bodyMedium?.copyWith(
                           height: 1.6,
                         ),
                       ),
                       const SizedBox(height: 30),
 
-                      // Skills
+                      // Skills & Expertise
                       Text(
                         "Skills & Expertise:",
-                        style: GoogleFonts.poppins(
-                          fontSize: 22,
+                        style: theme.textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: Colors.blue.shade800,
                         ),
                       ),
                       const SizedBox(height: 12),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text("✅ Expert in Flutter and React/Next.js"),
-                          Text("✅ Skilled in API integration — REST & GraphQL"),
-                          Text("✅ Experienced with Firebase and Google Cloud"),
+                        children: [
+                          Text(
+                            "✅ Expert in Flutter and React/Next.js",
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                          Text(
+                            "✅ Skilled in API integration — REST & GraphQL",
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                          Text(
+                            "✅ Experienced with Firebase and Google Cloud",
+                            style: theme.textTheme.bodyMedium,
+                          ),
                           Text(
                             "✅ Strong knowledge of state management (GetX, Provider, BLoC)",
+                            style: theme.textTheme.bodyMedium,
                           ),
                           Text(
                             "✅ Familiar with MVC / Clean architecture patterns",
+                            style: theme.textTheme.bodyMedium,
                           ),
                           Text(
                             "✅ Hands-on experience in CI/CD (GitHub Actions, Codemagic)",
+                            style: theme.textTheme.bodyMedium,
                           ),
                           Text(
                             "✅ Proficient in app publishing and maintenance",
+                            style: theme.textTheme.bodyMedium,
                           ),
                         ],
                       ),
@@ -105,24 +117,30 @@ class AboutSection extends StatelessWidget {
                       // Work Experience
                       Text(
                         "Work Experience:",
-                        style: GoogleFonts.poppins(
-                          fontSize: 22,
+                        style: theme.textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: Colors.blue.shade800,
                         ),
                       ),
                       const SizedBox(height: 12),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text("🏢 Seven Zero Technologies, UK (Remote)"),
+                        children: [
                           Text(
-                            "Flutter & Frontend Developer & Bekend Developer (Jan 2022 – Present)",
+                            "🏢 Seven Zero Technologies, UK (Remote)",
+                            style: theme.textTheme.bodyMedium,
                           ),
-                          SizedBox(height: 8),
-                          Text("🏢 Brine Software Solutions Pvt. Ltd, Dhaka"),
+                          Text(
+                            "Flutter & Frontend Developer & Backend Developer (Jan 2022 – Present)",
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            "🏢 Brine Software Solutions Pvt. Ltd, Dhaka",
+                            style: theme.textTheme.bodyMedium,
+                          ),
                           Text(
                             "Hybrid App Developer (Flutter | Ionic) (Sep 2019 – Oct 2021)",
+                            style: theme.textTheme.bodyMedium,
                           ),
                         ],
                       ),
@@ -131,19 +149,21 @@ class AboutSection extends StatelessWidget {
                       // Education
                       Text(
                         "Education:",
-                        style: GoogleFonts.poppins(
-                          fontSize: 22,
+                        style: theme.textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: Colors.blue.shade800,
                         ),
                       ),
                       const SizedBox(height: 12),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text("🎓 AVS College of Technology, Salem"),
+                        children: [
+                          Text(
+                            "🎓 AVS College of Technology, Salem",
+                            style: theme.textTheme.bodyMedium,
+                          ),
                           Text(
                             "B.E — Electrical and Electronics Engineering (EEE) 2014 – 2018",
+                            style: theme.textTheme.bodyMedium,
                           ),
                         ],
                       ),
@@ -152,7 +172,6 @@ class AboutSection extends StatelessWidget {
                 ),
               ],
             )
-          // Mobile layout
           : Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -162,37 +181,31 @@ class AboutSection extends StatelessWidget {
                     'assets/images/sohandev.png',
                     height: 250,
                     fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) =>
-                        const Icon(Icons.person, size: 100),
+                    errorBuilder: (context, error, stackTrace) => Icon(
+                      Icons.person,
+                      size: 100,
+                      color: theme.colorScheme.onBackground.withOpacity(0.3),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
                 Text(
                   "About Me",
-                  style: GoogleFonts.poppins(
-                    fontSize: 28,
+                  style: theme.textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: Colors.blue.shade900,
                   ),
+                  textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
                 Text(
                   "",
-                  style: GoogleFonts.poppins(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey[800],
-                  ),
+                  style: theme.textTheme.titleMedium,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),
                 Text(
                   "I'm a Mobile App & Frontend Developer with 3+ years of experience, specializing in Flutter and React/Next.js. I love building fast, responsive, and visually appealing digital experiences that work flawlessly across devices. Passionate about writing clean, maintainable code and staying updated with the latest technologies.",
-                  style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    color: Colors.grey[700],
-                    height: 1.5,
-                  ),
+                  style: theme.textTheme.bodyMedium?.copyWith(height: 1.5),
                   textAlign: TextAlign.center,
                 ),
               ],
