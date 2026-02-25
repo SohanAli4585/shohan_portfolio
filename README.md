@@ -1,16 +1,19 @@
-# sohan_portfolio
+# Shohan Portfolio
 
-A new Flutter project.
+Md Shohan Ahamed | Flutter Developer
 
-## Getting Started
+This is my personal Flutter portfolio showcasing my skills, projects, and contact info.
 
-This project is a starting point for a Flutter application.
+## Features
+- Custom Splash Screen
+- Responsive design for Web & Mobile
+- Sections: Home, About, Skills, Projects, Contact
+- Light/Dark theme toggle
 
-A few resources to get you started if this is your first Flutter project:
+## Tech Stack
+- Flutter
+- Google Fonts
+- Firebase (optional backend)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Live Demo
+[View Portfolio Online](https://SohanAli4585.github.io/shohan_portfolio/)
