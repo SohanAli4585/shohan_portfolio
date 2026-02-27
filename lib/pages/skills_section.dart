@@ -164,7 +164,7 @@ class SkillsSection extends StatelessWidget {
           Center(
             child: ElevatedButton.icon(
               onPressed: () {
-                html.window.open('assets/images/my_cv.pdf', '_blank');
+                html.window.open('my_cv.pdf', '_blank');
               },
               icon: const Icon(Icons.download),
               label: const Text("Download CV"),
