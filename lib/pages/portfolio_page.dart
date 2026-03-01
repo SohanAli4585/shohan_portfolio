@@ -23,15 +23,20 @@ class PortfolioPage extends StatefulWidget {
 class _PortfolioPageState extends State<PortfolioPage> {
   final ScrollController _scrollController = ScrollController();
 
+  String _currentSection = 'home'; // ⭐ active section tracking
+
   final homeKey = GlobalKey();
   final aboutKey = GlobalKey();
   final skillsKey = GlobalKey();
   final projectsKey = GlobalKey();
   final contactKey = GlobalKey();
 
-  void scrollToSection(GlobalKey key) {
+  // ✅ smooth scroll
+  void scrollToSection(GlobalKey key, String sectionName) {
     final context = key.currentContext;
     if (context != null) {
+      setState(() => _currentSection = sectionName);
+
       Scrollable.ensureVisible(
         context,
         duration: const Duration(milliseconds: 700),
@@ -45,7 +50,9 @@ class _PortfolioPageState extends State<PortfolioPage> {
     return Scaffold(
       body: Column(
         children: [
+          // ✅ PRO NAVBAR
           NavBar(
+            currentSection: _currentSection,
             isDarkMode: widget.themeMode == ThemeMode.dark,
             onThemeToggle: () {
               widget.onThemeChanged(
@@ -57,24 +64,25 @@ class _PortfolioPageState extends State<PortfolioPage> {
             onItemSelected: (section) {
               switch (section) {
                 case 'home':
-                  scrollToSection(homeKey);
+                  scrollToSection(homeKey, 'home');
                   break;
                 case 'about':
-                  scrollToSection(aboutKey);
+                  scrollToSection(aboutKey, 'about');
                   break;
                 case 'skills':
-                  scrollToSection(skillsKey);
+                  scrollToSection(skillsKey, 'skills');
                   break;
                 case 'projects':
-                  scrollToSection(projectsKey);
+                  scrollToSection(projectsKey, 'projects');
                   break;
                 case 'contact':
-                  scrollToSection(contactKey);
+                  scrollToSection(contactKey, 'contact');
                   break;
               }
             },
           ),
 
+          // ✅ SCROLL BODY
           Expanded(
             child: SingleChildScrollView(
               controller: _scrollController,

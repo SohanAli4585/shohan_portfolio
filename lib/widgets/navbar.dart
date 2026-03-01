@@ -4,12 +4,14 @@ class NavBar extends StatelessWidget {
   final Function(String) onItemSelected;
   final bool isDarkMode;
   final VoidCallback onThemeToggle;
+  final String currentSection; // ⭐ active highlight
 
   const NavBar({
     super.key,
     required this.onItemSelected,
     required this.isDarkMode,
     required this.onThemeToggle,
+    required this.currentSection,
   });
 
   @override
@@ -34,9 +36,8 @@ class NavBar extends StatelessWidget {
     );
   }
 
-  /// Web Layout
+  /// 🌐 Web Layout
   List<Widget> _webNavItems(BuildContext context) {
-    final theme = Theme.of(context);
     return [
       Row(
         children: [
@@ -52,7 +53,7 @@ class NavBar extends StatelessWidget {
     ];
   }
 
-  /// Mobile Layout
+  /// 📱 Mobile Layout
   List<Widget> _mobileNavItems(BuildContext context) {
     return [
       IconButton(
@@ -64,7 +65,7 @@ class NavBar extends StatelessWidget {
     ];
   }
 
-  /// Theme toggle icon
+  /// 🌙 Theme toggle icon
   Widget _themeToggleIcon(BuildContext context) {
     final theme = Theme.of(context);
     return InkWell(
@@ -85,37 +86,70 @@ class NavBar extends StatelessWidget {
     );
   }
 
-  /// Mobile menu modal
+  /// 📱 Mobile menu modal (improved)
   void _showMobileMenu(BuildContext context) {
     showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
+      ),
       builder: (_) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _navItem(context, 'Home', 'home'),
-            _navItem(context, 'About', 'about'),
-            _navItem(context, 'Skills', 'skills'),
-            _navItem(context, 'Projects', 'projects'),
-            _navItem(context, 'Contact', 'contact'),
-          ],
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _navItem(context, 'Home', 'home'),
+                _navItem(context, 'About', 'about'),
+                _navItem(context, 'Skills', 'skills'),
+                _navItem(context, 'Projects', 'projects'),
+                _navItem(context, 'Contact', 'contact'),
+              ],
+            ),
+          ),
         );
       },
     );
   }
 
-  /// Nav item button
+  /// 🔥 Nav item button (PRO)
   Widget _navItem(BuildContext context, String title, String section) {
     final theme = Theme.of(context);
-    return TextButton(
-      onPressed: () {
-        onItemSelected(section);
-        Navigator.of(context).pop(); // Close mobile menu if open
-      },
-      child: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          fontWeight: FontWeight.w500,
+    final isActive = currentSection == section;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: TextButton(
+          onPressed: () {
+            onItemSelected(section);
+
+            // ✅ SAFE POP (fix white screen)
+            if (Navigator.canPop(context)) {
+              Navigator.of(context).pop();
+            }
+          },
+          style: TextButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+            backgroundColor: isActive
+                ? theme.colorScheme.primary.withOpacity(0.12)
+                : Colors.transparent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+          child: Text(
+            title,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+              color: isActive
+                  ? theme.colorScheme.primary
+                  : theme.textTheme.bodyMedium?.color,
+            ),
+          ),
         ),
       ),
     );
